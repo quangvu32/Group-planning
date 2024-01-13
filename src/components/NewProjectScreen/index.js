@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity , Alert} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styles from './styles.js'
+import * as server from '../../server/AuthService.js';
 
 const NewProjectScreen = ({route, navigation}) => {
     const [projectName, setProjectName] = useState('');
     const [projectDescription, setProjectDescription] = useState('');
     const { onProjectSubmit } = route.params;
-  
-    
   
     const generateKeyWithTimestamp = () => {
       return new Date().getTime().toString();
@@ -16,9 +15,7 @@ const NewProjectScreen = ({route, navigation}) => {
   
     const handleCreate = () => {
       if (projectName.length){
-  
-    
-    
+
       const newProject = { 
         id: generateKeyWithTimestamp() ,
         title: projectName, 
@@ -30,8 +27,11 @@ const NewProjectScreen = ({route, navigation}) => {
       }
       console.log('Project Created:',newProject);
       onProjectSubmit(newProject); 
+      server.connectSocket(); 
+      server.newProject(newProject);
       navigation.goBack(); 
      }
+
       else{
   
         Alert.alert(
