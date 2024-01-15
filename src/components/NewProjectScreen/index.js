@@ -9,15 +9,15 @@ const NewProjectScreen = ({route, navigation}) => {
     const [projectDescription, setProjectDescription] = useState('');
     const { onProjectSubmit } = route.params;
   
-    const generateKeyWithTimestamp = () => {
-      return new Date().getTime().toString();
-    };
+    // const generateKeyWithTimestamp = () => {
+    //   return new Date().getTime().toString();
+    // };
   
     const handleCreate = () => {
       if (projectName.length){
 
       const newProject = { 
-        id: generateKeyWithTimestamp() ,
+        id: '' ,
         title: projectName, 
         createdAt: new Date(),
         completionStatus: '',

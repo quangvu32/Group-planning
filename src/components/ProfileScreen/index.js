@@ -76,7 +76,7 @@ const ProfileScreen = () => {
             avatar ? (
               <Image source={{ uri: avatar }} style={styles.profileImage} />
             ) : (
-              <Ionicons name="person" size={55} style={styles.profileImage}/>
+              <Ionicons name="person" size={55} style={{borderRadius: 100, backgroundColor: '#C2C2C2', padding: 30}}/>
             )
           }
         </TouchableOpacity>
