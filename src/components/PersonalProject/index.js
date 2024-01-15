@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './styles.js'
@@ -21,15 +22,19 @@ const getRelativeTime = (date) => {
 
 const PersonalProject = ({ navigation }) => {
   const [projects, setProjects] = useState([]);
+  const isFocused = useIsFocused();
 
-
-  useEffect(() => {
+useEffect(() => {
+  if (isFocused){
     loadProjects();
-  }, []);
+  }
+}, [isFocused]);
 
   useEffect(() => {
-    storeProjects(projects);
-  }, [projects]);
+    if(isFocused){
+      storeProjects(projects);
+    }
+  }, [isFocused, projects]);
 
 
 
